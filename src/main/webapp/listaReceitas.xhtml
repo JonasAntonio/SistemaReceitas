@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templateLogadoComum.xhtml">
+
+            <ui:define name="top">
+                <div style="margin: auto; width: 80%; font-family: arial, sans-serif; margin-bottom: 50px;">
+                    <h2 style="color:#E80C44">Nossas melhores receitas</h2>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                <div style="margin: auto; width: 80%;">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; font-family: arial, sans-serif; color: #7c7c7c;">
+                        
+                        <!--Laço para listar as receitas cadastradas no banco de dados-->
+                        <div style="width: 29%; min-width: 29%; border: 1px solid #dfdfdf; height: 450px; border-radius: 5px; margin-bottom: 20px;">
+                            <img src="./imagens/1.jpg" style="max-width: 100%; border-radius: 5px;"/>                        
+                            <div style="padding: 20px">
+                                <span style="font-size: 12px;">Autor: @VóMaria - Data Publicação: 20/11/2018</span>
+                                <h3>Macarrão ao Molho Branco</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
+                                <button style="min-width: 100px; min-height: 40px; background-color: #007ad9; border-color: #007ad9; color: #fff;">
+                                    Leia mais...
+                                </button>
+                            </div>
+                        </div>                       
+                        
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
