@@ -53,7 +53,7 @@ public class UsuarioLoginBean implements Serializable {
         Optional<Usuario> usuario = facade.findByCredenciais(login, senha);
         if (usuario.isPresent()) {
             this.usuarioLogadoBean.setUsuario(usuario.get());
-            return "listaReceitas";
+            return "adicionarReceita";
         }
 
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha ao Autenticar", "Usuário ou senha inválido!");

@@ -31,34 +31,34 @@
                                 <h:panelGrid columns="4" cellpadding="30">             
                                     <h:panelGrid columns="4" cellpadding="5">
                                         <p:outputLabel value="Usuário"/>
-                                        <p:inputText id="usuario"  value="" validatorMessage="Insira um usuário válido!"
+                                        <p:inputText id="usuario"  value="#{usuarioBean.usuario.nome}" validatorMessage="Insira um usuário válido!"
                                                      required="true" requiredMessage="Você deve preencher o campo de usuário!">
                                             <f:validateLength minimum="5" maximum="20"/>
                                             <p:tooltip for="usuario" value="min. 5, max. 20" trackMouse="true"/>
                                         </p:inputText> 
                                         
                                         <p:outputLabel value="Email"/>
-                                        <p:inputText id="email"  value="" validatorMessage="Insira um email válido!"
+                                        <p:inputText id="email"  value="#{usuarioBean.usuario.email}" validatorMessage="Insira um email válido!"
                                                      required="true" requiredMessage="Você deve preencher o campo de email!">
                                             <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
                                             <p:tooltip for="email" value="ex. 'email@dominio.com.br'" trackMouse="true"/>
                                         </p:inputText>
                                         
                                         <p:outputLabel value="Senha"/>
-                                        <p:password id="senha" value="" match="confirmarSenha" validatorMessage="Digite uma senha válida!"
+                                        <p:password id="senha" value="#{usuarioBean.usuario.senha}" match="confirmarSenha" validatorMessage="Digite uma senha válida!"
                                                     required="true" requiredMessage="Você deve inserir uma senha!">
                                             <f:validateLength minimum="5" maximum="20"/>
                                             <p:tooltip for="senha" value="min. 5, max. 20" trackMouse="true"/>
                                         </p:password>
                                         
                                         <p:outputLabel value="Confirmar Senha"/>
-                                        <p:password id="confirmarSenha" value="" validatorMessage="Confirmação incorreta!"
+                                        <p:password id="confirmarSenha" validatorMessage="Confirmação incorreta!"
                                                     required="true" requiredMessage="Você deve confirmar sua senha!">
                                             <p:tooltip for="confirmarSenha" value="Deve ser igual a sua senha" trackMouse="true"/>
                                         </p:password>
                                     </h:panelGrid>
                                 </h:panelGrid>
-                                <p:commandButton value="Cadastrar" id="commandButton-acessar" /><br/><br/>
+                                <p:commandButton value="Cadastrar" id="commandButton-cadastrar" action="#{usuarioBean.cadastrar()}"/><br/><br/>
                             </h:form>
                             <br/>
                             <h:form>

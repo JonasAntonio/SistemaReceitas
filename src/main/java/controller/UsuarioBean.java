@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import model.Usuario;
+import util.Hash;
 
 /**
  *
@@ -20,22 +21,11 @@ import model.Usuario;
 @RequestScoped
 public class UsuarioBean {
 
-    private Usuario usuario;
+    private Usuario usuario = new Usuario();
     
     @Inject
     private UsuarioFacade usuarioFacade;
-    
-    /**
-     * Creates a new instance of UsuarioBean
-     */
-    public UsuarioBean() {
-    }
-    
-    @PostConstruct
-    public void Init() {
-        usuario = new Usuario();
-    }
-
+   
     public Usuario getUsuario() {
         return usuario;
     }
@@ -52,9 +42,11 @@ public class UsuarioBean {
         this.usuarioFacade = usuarioFacade;
     }
     
-    public void Cadastrar() {
+    public String Cadastrar() {
+        String senha = usuario.getSenha();
+        usuario.setSenha(Hash.md5(senha));
         usuarioFacade.create(usuario);
-        Init();
+        return "login";
     }
 
 }

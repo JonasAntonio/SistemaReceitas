@@ -25,12 +25,6 @@ public class AvaliacaoBean {
     @Inject
     private AvaliacaoFacade avaliacaoFacade;
     
-    /**
-     * Creates a new instance of AvaliacaoBean
-     */
-    public AvaliacaoBean() {
-    }
-    
     @PostConstruct
     public void Init() {
         avaliacao = new Avaliacao();

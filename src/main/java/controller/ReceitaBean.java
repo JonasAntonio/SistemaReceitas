@@ -25,12 +25,6 @@ public class ReceitaBean {
     @Inject
     private ReceitaFacade receitaFacade;
     
-    /**
-     * Creates a new instance of ReceitaBean
-     */
-    public ReceitaBean() {
-    }
-    
     @PostConstruct
     public void Init() {
         receita = new Receita();

@@ -16,8 +16,8 @@
                         <p:menuitem value="Pesquisar Receita" url="#.xhtml"/>
                         <p:menuitem value="Adicionar Receita" url="adicionarReceita.xhtml"/>
                         <f:facet name="options">
-                            <p:outputLabel style="margin:1px 10px 1px 1px;" value="@nomedousuario"/>
-                            <p:commandButton type="button" value="Sair" />
+                            <p:outputLabel style="margin:1px 10px 1px 1px;" value="#{usuarioLogadoBean.usuario.nome}"/>
+                            <p:commandButton value="Sair" action="#{usuarioLogadoBean.logout()}"/>
                         </f:facet>
                     </p:menubar>
                 </h:form>
