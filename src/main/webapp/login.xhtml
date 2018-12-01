@@ -10,7 +10,12 @@
         <ui:composition template="./WEB-INF/templateAcessoBasico.xhtml">
 
             <ui:define name="top">
-                top
+                <h:form>
+                <p:menubar>
+                    <p:menuitem value="Login" url="login.xhtml"/>
+                    <p:menuitem value="Cadastrar" url="cadastrar.xhtml"/>
+                </p:menubar>
+                </h:form>
             </ui:define>
 
             <ui:define name="content">
@@ -29,7 +34,7 @@
                                         <p:commandButton value="Entrar" id="commandButton-acessar" />
                                     </h:panelGrid>
                                 </h:panelGrid>
-                                <p:commandLink value="Ainda não possui um usuário? Clique aqui e se cadastre" action="#"/>
+                                <p:commandLink value="Ainda não possui um usuário? Clique aqui e se cadastre" action="cadastrar.xhtml"/>
                             </p:panel>
                         </h:form>
                     </div>
