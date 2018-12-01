@@ -14,17 +14,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author jonas
+ * @author Juan Ferreira Carlos
  */
 @Entity
 @Table(name = "avaliacao")
@@ -33,9 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Avaliacao.findAll", query = "SELECT a FROM Avaliacao a")
     , @NamedQuery(name = "Avaliacao.findById", query = "SELECT a FROM Avaliacao a WHERE a.id = :id")
     , @NamedQuery(name = "Avaliacao.findByAvaliacao", query = "SELECT a FROM Avaliacao a WHERE a.avaliacao = :avaliacao")
-    , @NamedQuery(name = "Avaliacao.findByTitulo", query = "SELECT a FROM Avaliacao a WHERE a.titulo = :titulo")
-    , @NamedQuery(name = "Avaliacao.findByReceita", query = "SELECT a FROM Avaliacao a WHERE a.receita = :receita")
-    , @NamedQuery(name = "Avaliacao.findByUsuario", query = "SELECT a FROM Avaliacao a WHERE a.usuario = :usuario")})
+    , @NamedQuery(name = "Avaliacao.findByTitulo", query = "SELECT a FROM Avaliacao a WHERE a.titulo = :titulo")})
 public class Avaliacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,32 +50,18 @@ public class Avaliacao implements Serializable {
     @Size(max = 30)
     @Column(name = "titulo")
     private String titulo;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "receita")
-    private long receita;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "usuario")
-    private long usuario;
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Receita receita1;
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Usuario usuario1;
+    @JoinColumn(name = "receita", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Receita receita;
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Usuario usuario;
 
     public Avaliacao() {
     }
 
     public Avaliacao(Long id) {
         this.id = id;
-    }
-
-    public Avaliacao(Long id, long receita, long usuario) {
-        this.id = id;
-        this.receita = receita;
-        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -113,36 +96,20 @@ public class Avaliacao implements Serializable {
         this.titulo = titulo;
     }
 
-    public long getReceita() {
+    public Receita getReceita() {
         return receita;
     }
 
-    public void setReceita(long receita) {
+    public void setReceita(Receita receita) {
         this.receita = receita;
     }
 
-    public long getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(long usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public Receita getReceita1() {
-        return receita1;
-    }
-
-    public void setReceita1(Receita receita1) {
-        this.receita1 = receita1;
-    }
-
-    public Usuario getUsuario1() {
-        return usuario1;
-    }
-
-    public void setUsuario1(Usuario usuario1) {
-        this.usuario1 = usuario1;
     }
 
     @Override

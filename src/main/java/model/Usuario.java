@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,15 +16,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author jonas
+ * @author Juan Ferreira Carlos
  */
 @Entity
 @Table(name = "usuario")
@@ -63,8 +65,8 @@ public class Usuario implements Serializable {
     @NotNull
     @Column(name = "administrador")
     private boolean administrador;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario1")
-    private Avaliacao avaliacao;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private Collection<Avaliacao> avaliacaoCollection;
 
     public Usuario() {
     }
@@ -121,12 +123,13 @@ public class Usuario implements Serializable {
         this.administrador = administrador;
     }
 
-    public Avaliacao getAvaliacao() {
-        return avaliacao;
+    @XmlTransient
+    public Collection<Avaliacao> getAvaliacaoCollection() {
+        return avaliacaoCollection;
     }
 
-    public void setAvaliacao(Avaliacao avaliacao) {
-        this.avaliacao = avaliacao;
+    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
+        this.avaliacaoCollection = avaliacaoCollection;
     }
 
     @Override
