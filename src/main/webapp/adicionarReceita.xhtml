@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./WEB-INF/templateAcessoBasico.xhtml">
+
+            <ui:define name="top">
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem value="Receitas" url="#.xhtml"/>
+                        <p:menuitem value="Pesquisar Receita" url="#.xhtml"/>
+                        <p:menuitem value="Adicionar Receita" url="adicionarReceita.xhtml"/>
+                        <f:facet name="options">
+                            <p:outputLabel style="margin:1px 10px 1px 1px;" value="@nomedousuario"/>
+                            <p:commandButton type="button" value="Sair" />
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <div style="display: flex;">
+                    <div style="margin: auto; text-align: center;">
+                        <br/>
+                        <h:form>
+                            <p:panel>
+                                <h:outputLabel value="Nova Receita" style="font-size: 30px"/>
+                                <br/><br/>
+                                <p:messages autoUpdate="true" closable="true"/>
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:outputLabel value="Título"/>
+                                    <p:inputText id="titulo" value="" size="100" required="true" 
+                                                 requiredMessage="Preencha o campo de Título!"
+                                                 validatorMessage="Insira um Título válido!">
+                                        <f:validateLength minimum="5" maximum="20"/>
+                                        <p:tooltip for="titulo" value="min. 5, max. 20" trackMouse="true"/>
+                                    </p:inputText>
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2"  cellpadding="5">
+                                    <p:outputLabel value="Ingredientes"/>
+                                    <p:outputLabel value="Modo de Preparo"/>
+                                    <p:inputTextarea id="ingredientes" value="" cols="52" rows="10" 
+                                                     required="true" requiredMessage="Preencha o campo de Ingredientes!"
+                                                     validatorMessage="Preencha corretamente o campo de Ingredientes!">
+                                        <f:validateLength minimum="20" maximum="255"/>
+                                        <p:tooltip for="ingredientes" value="min. 20, max. 255" trackMouse="true"/>
+                                    </p:inputTextarea>
+                                    <p:inputTextarea id="preparo" value="" cols="52" rows="10" 
+                                                     required="true" requiredMessage="Preencha o campo de Modo de Preparo!"
+                                                     validatorMessage="Preencha corretamente o campo de Modo de Preparo!">
+                                        <f:validateLength minimum="20" maximum="255"/>
+                                        <p:tooltip for="preparo" value="min. 20, max. 255" trackMouse="true"/>
+                                    </p:inputTextarea>
+
+                                    <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
+                                        <p:outputLabel value="Tempo de Preparo"/>
+                                        <p:outputLabel value="Rendimento (Porções)"/>
+                                        <p:inputNumber id="tempo" size="20" value="">
+                                            <f:validateLength minimum="1"/>
+                                            <p:tooltip for="tempo" value="Tempo em minutos" trackMouse="true"/>
+                                        </p:inputNumber>
+                                        <p:inputNumber id="rendimento" size="20" value="">
+                                            <f:validateLength minimum="1"/>
+                                            <p:tooltip for="rendimento" value="Quantidade rendida (porções)" trackMouse="true"/>
+                                        </p:inputNumber>
+                                    </h:panelGrid>
+
+                                    <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
+                                        <p:outputLabel value="Link para Vídeo"/>
+                                        <p:inputText id="video" size="30" value="">
+                                            <p:tooltip for="video" value="Link de um vídeo da sua receita" trackMouse="true"/>
+                                        </p:inputText>
+
+                                        <p:outputLabel value="Imagem"/>
+                                        <p:fileUpload id="imagem" value="" mode="simple"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <p:commandButton value="Cadastrar" id="commandButton-acessar" /><br/><br/>
+                            </p:panel>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
