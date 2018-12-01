@@ -5,8 +5,12 @@
  */
 package controller;
 
+import facade.AvaliacaoFacade;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import model.Avaliacao;
 
 /**
  *
@@ -16,10 +20,38 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class AvaliacaoBean {
 
+    private Avaliacao avaliacao;
+    
+    @Inject
+    private AvaliacaoFacade avaliacaoFacade;
+    
     /**
      * Creates a new instance of AvaliacaoBean
      */
     public AvaliacaoBean() {
     }
+    
+    @PostConstruct
+    public void Init() {
+        avaliacao = new Avaliacao();
+    }
+
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public AvaliacaoFacade getAvaliacaoFacade() {
+        return avaliacaoFacade;
+    }
+
+    public void setAvaliacaoFacade(AvaliacaoFacade avaliacaoFacade) {
+        this.avaliacaoFacade = avaliacaoFacade;
+    }
+    
+    
     
 }

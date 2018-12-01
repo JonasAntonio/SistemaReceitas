@@ -5,8 +5,12 @@
  */
 package controller;
 
+import facade.ReceitaFacade;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import model.Receita;
 
 /**
  *
@@ -16,10 +20,36 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class ReceitaBean {
 
+    private Receita receita;
+    
+    @Inject
+    private ReceitaFacade receitaFacade;
+    
     /**
      * Creates a new instance of ReceitaBean
      */
     public ReceitaBean() {
+    }
+    
+    @PostConstruct
+    public void Init() {
+        receita = new Receita();
+    }
+
+    public Receita getReceita() {
+        return receita;
+    }
+
+    public void setReceita(Receita receita) {
+        this.receita = receita;
+    }
+
+    public ReceitaFacade getReceitaFacade() {
+        return receitaFacade;
+    }
+
+    public void setReceitaFacade(ReceitaFacade receitaFacade) {
+        this.receitaFacade = receitaFacade;
     }
     
 }
