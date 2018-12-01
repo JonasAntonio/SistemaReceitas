@@ -6,7 +6,6 @@
 /home/juan/GitHub/NetBeans/SistemaReceitas/src/main/java/model/Receita.java
 /home/juan/GitHub/NetBeans/SistemaReceitas/src/main/java/controller/UsuarioLoginBean.java
 /home/juan/GitHub/NetBeans/SistemaReceitas/src/main/java/facade/AbstractFacade.java
-/home/juan/GitHub/NetBeans/SistemaReceitas/src/main/java/listener/AutenticationListener.java
 /home/juan/GitHub/NetBeans/SistemaReceitas/src/main/java/facade/ReceitaFacade.java
 /home/juan/GitHub/NetBeans/SistemaReceitas/src/main/java/controller/AvaliacaoBean.java
 /home/juan/GitHub/NetBeans/SistemaReceitas/src/main/java/model/Avaliacao.java

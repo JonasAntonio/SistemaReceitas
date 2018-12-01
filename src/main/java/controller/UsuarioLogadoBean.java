@@ -23,17 +23,11 @@ public class UsuarioLogadoBean implements Serializable {
     
     private Usuario usuario;
     
-    /**
-     * Creates a new instance of UsuarioLogado
-     */
-    public UsuarioLogadoBean() {
-    }
-
     public Usuario getUsuario() {
-        return usuario;
+        return this.usuario;
     }
-
-    public void setUsuario(Usuario usuario) {
+    
+    public void setUsuario(Usuario usuario){
         this.usuario = usuario;
     }
     
@@ -41,12 +35,7 @@ public class UsuarioLogadoBean implements Serializable {
         return usuario != null;
     }
     
-    public boolean administrator() {
-        return usuario.getAdministrador();
-    }
-    
-    
-    public String Deslogar() {
+    public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/login.xhtml?faces-redirect=true";
     }

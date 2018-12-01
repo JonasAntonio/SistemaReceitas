@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
     , @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")
     , @NamedQuery(name = "Usuario.findByAdministrador", query = "SELECT u FROM Usuario u WHERE u.administrador = :administrador")
-    , @NamedQuery(name = "Usuario.findByCredenciais", query = "SELECT u FROM Usuario u WHERE u.nome = :nome AND u.senha = :senha")})
+    , @NamedQuery(name = "Usuario.findByCredenciais", query = "SELECT u FROM Usuario u WHERE u.nome = :login AND u.senha = :senha")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +59,7 @@ public class Usuario implements Serializable {
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 32)
     @Column(name = "senha")
     private String senha;
     @Basic(optional = false)

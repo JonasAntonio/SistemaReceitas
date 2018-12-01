@@ -9,6 +9,7 @@ import facade.UsuarioFacade;
 import java.io.Serializable;
 import java.util.Optional;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -23,44 +24,21 @@ import model.Usuario;
 public class UsuarioLoginBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+  
     @Inject
     private UsuarioLogadoBean usuarioLogadoBean;
-    
-    @Inject
-    private UsuarioFacade usuarioFacade;
-    
-    private String usuario; 
+
+    @Inject UsuarioFacade facade;
+
+    private String login;
     private String senha;
-    
-    /**
-     * Creates a new instance of UsuarioLoginBean
-     */
-    public UsuarioLoginBean() {
-    }
-    
-    public UsuarioLogadoBean getUsuarioLogadoBean() {
-        return usuarioLogadoBean;
+
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsuarioLogadoBean(UsuarioLogadoBean usuarioLogadoBean) {
-        this.usuarioLogadoBean = usuarioLogadoBean;
-    }
-
-    public UsuarioFacade getUsuarioFacade() {
-        return usuarioFacade;
-    }
-
-    public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
-        this.usuarioFacade = usuarioFacade;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getSenha() {
@@ -70,15 +48,16 @@ public class UsuarioLoginBean implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    public String Logar() {
-        Optional<Usuario> user = usuarioFacade.findByCredenciais(this.usuario, senha);
-        if (user.isPresent()) {
-            this.usuarioLogadoBean.setUsuario(user.get());
-            return "/index.xhtml";
+  
+    public String efetuarLogin(){
+        Optional<Usuario> usuario = facade.findByCredenciais(login, senha);
+        if (usuario.isPresent()) {
+            this.usuarioLogadoBean.setUsuario(usuario.get());
+            return "listaReceitas";
         }
-        FacesMessage msg = new FacesMessage("Usuário ou senha inválido!");
-        return "/login.xhtml?erro="+msg;
+
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha ao Autenticar", "Usuário ou senha inválido!");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        return null;
     }
-    
 }

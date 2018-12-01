@@ -38,6 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Receita.findByVideo", query = "SELECT r FROM Receita r WHERE r.video = :video")})
 public class Receita implements Serializable {
 
+    @Lob
+    @Column(name = "imagem")
+    private byte[] imagem;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,9 +53,6 @@ public class Receita implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "titulo")
     private String titulo;
-    @Lob
-    @Column(name = "imagem")
-    private byte[] imagem;
     @Size(max = 255)
     @Column(name = "video")
     private String video;
@@ -93,13 +94,6 @@ public class Receita implements Serializable {
         this.titulo = titulo;
     }
 
-    public byte[] getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
-    }
 
     public String getVideo() {
         return video;
@@ -149,6 +143,14 @@ public class Receita implements Serializable {
     @Override
     public String toString() {
         return "model.Receita[ id=" + id + " ]";
+    }
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
     
 }
