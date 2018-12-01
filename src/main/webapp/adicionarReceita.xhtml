@@ -59,24 +59,13 @@
                                     </p:inputTextarea>
 
                                     <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
-                                        <p:outputLabel value="Tempo de Preparo"/>
-                                        <p:outputLabel value="Rendimento (Porções)"/>
-                                        <p:inputNumber id="tempo" size="20" value="">
-                                            <f:validateLength minimum="1"/>
-                                            <p:tooltip for="tempo" value="Tempo em minutos" trackMouse="true"/>
-                                        </p:inputNumber>
-                                        <p:inputNumber id="rendimento" size="20" value="">
-                                            <f:validateLength minimum="1"/>
-                                            <p:tooltip for="rendimento" value="Quantidade rendida (porções)" trackMouse="true"/>
-                                        </p:inputNumber>
-                                    </h:panelGrid>
-
-                                    <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
                                         <p:outputLabel value="Link para Vídeo"/>
                                         <p:inputText id="video" size="30" value="">
                                             <p:tooltip for="video" value="Link de um vídeo da sua receita" trackMouse="true"/>
                                         </p:inputText>
+                                    </h:panelGrid>
 
+                                    <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
                                         <p:outputLabel value="Imagem"/>
                                         <p:fileUpload id="imagem" value="" mode="simple"/>
                                     </h:panelGrid>
