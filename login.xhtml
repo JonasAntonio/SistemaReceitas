@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templateAcessoBasico.xhtml">
+
+            <ui:define name="top">
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem value="Login" url="login.xhtml"/>
+                        <p:menuitem value="Cadastrar" url="cadastrar.xhtml"/>
+                    </p:menubar>
+                </h:form>
+            </ui:define>
+            
+            <ui:define name="content">
+                <div style="display: flex;">
+                    <div style="margin: auto; text-align: center;">
+                        <p:messages autoUpdate="true"/>
+                        <br/>
+                        <h:form id="login-form">          
+                            <p:panel header="Bem-Vindo, faça seu login para continuar!" style="width:fit-content">
+                                
+                                <h:panelGrid columns="2" cellpadding="30">             
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <p:outputLabel value="Usuário"/>
+                                        <p:inputText id="usuario"  value="" required="true" requiredMessage="Você deve preencher seu login!">
+                                            <f:validateLength minimum="5" maximum="20"/>
+                                            <p:tooltip for="usuario" value="min. 5, max. 20" trackMouse="true"/>
+                                        </p:inputText>
+                                        <p:outputLabel value="Senha"/>
+                                        <p:password id="senha" value="" required="true" requiredMessage="Você deve preencher sua senha!">
+                                            <f:validateLength minimum="5" maximum="20"/>
+                                            <p:tooltip for="senha" value="min. 5, max. 20" trackMouse="true"/>
+                                        </p:password>
+                                        &nbsp;
+                                        <p:commandButton value="Entrar" id="commandButton-acessar" />
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                
+                            </p:panel>
+                        </h:form>
+                        <br/>
+                        <h:form>
+                            <p:commandLink value="Ainda não possui um usuário? Clique aqui e se cadastre!" action="cadastrar.xhtml"/>
+                        </h:form>
+                        
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
