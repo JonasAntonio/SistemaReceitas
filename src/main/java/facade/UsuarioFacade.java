@@ -5,10 +5,15 @@
  */
 package facade;
 
+import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import model.Usuario;
+import util.Hash;
 
 /**
  *
@@ -27,6 +32,17 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+    public Optional<Usuario> findByCredenciais(String nome, String senha) {
+        TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findByCredenciais", Usuario.class);
+        query.setParameter("nome", nome);
+        query.setParameter("senha", Hash.md5(senha));
+        try {
+            return Optional.of(query.getSingleResult());
+        } catch (NonUniqueResultException | NoResultException e) {
+            return Optional.empty();
+        }
     }
     
 }

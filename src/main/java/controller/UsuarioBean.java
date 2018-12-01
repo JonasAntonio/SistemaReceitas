@@ -52,4 +52,9 @@ public class UsuarioBean {
         this.usuarioFacade = usuarioFacade;
     }
     
+    public void Cadastrar() {
+        usuarioFacade.create(usuario);
+        Init();
+    }
+
 }

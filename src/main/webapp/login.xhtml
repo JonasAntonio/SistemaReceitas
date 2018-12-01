@@ -30,17 +30,17 @@
                                 <h:panelGrid columns="2" cellpadding="30">             
                                     <h:panelGrid columns="2" cellpadding="5">
                                         <p:outputLabel value="Usuário"/>
-                                        <p:inputText id="usuario"  value="" required="true" requiredMessage="Você deve preencher seu login!">
+                                        <p:inputText id="usuario"  value="#{usuarioLoginBean.usuario}" required="true" requiredMessage="Você deve preencher seu login!">
                                             <f:validateLength minimum="5" maximum="20"/>
                                             <p:tooltip for="usuario" value="min. 5, max. 20" trackMouse="true"/>
                                         </p:inputText>
                                         <p:outputLabel value="Senha"/>
-                                        <p:password id="senha" value="" required="true" requiredMessage="Você deve preencher sua senha!">
+                                        <p:password id="senha" value="#{usuarioLoginBean.senha}" required="true" requiredMessage="Você deve preencher sua senha!">
                                             <f:validateLength minimum="5" maximum="20"/>
                                             <p:tooltip for="senha" value="min. 5, max. 20" trackMouse="true"/>
                                         </p:password>
                                         &nbsp;
-                                        <p:commandButton value="Entrar" id="commandButton-acessar" />
+                                        <p:commandButton value="Entrar" id="commandButton-acessar" action="#{usuarioLoginBean.Logar()}"/>
                                     </h:panelGrid>
                                 </h:panelGrid>
                                 
