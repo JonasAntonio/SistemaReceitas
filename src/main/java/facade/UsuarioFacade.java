@@ -33,8 +33,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
-    public Optional<Usuario> findByCredenciais(String login, String senha){
+
+    public Optional<Usuario> findByCredenciais(String login, String senha) {
         TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findByCredenciais", Usuario.class);
         query.setParameter("login", login);
         query.setParameter("senha", Hash.md5(senha));

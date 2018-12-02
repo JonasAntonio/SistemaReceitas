@@ -6,9 +6,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,12 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
     , @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")
     , @NamedQuery(name = "Usuario.findByAdministrador", query = "SELECT u FROM Usuario u WHERE u.administrador = :administrador")
-    , @NamedQuery(name = "Usuario.findByCredenciais", query= "SELECT u FROM Usuario u WHERE u.nome = :login AND u.senha = :senha")})
+    , @NamedQuery(name = "Usuario.findByCredenciais", query = "SELECT u FROM Usuario u WHERE u.nome = :login AND u.senha = :senha")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,17 +55,13 @@ public class Usuario implements Serializable {
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 32)
     @Column(name = "senha")
     private String senha;
     @Basic(optional = false)
     @NotNull
     @Column(name = "administrador")
     private boolean administrador;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Receita> receitaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private Collection<Avaliacao> avaliacaoCollection;
 
     public Usuario() {
     }
@@ -124,24 +116,6 @@ public class Usuario implements Serializable {
 
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
-    }
-
-    @XmlTransient
-    public Collection<Receita> getReceitaCollection() {
-        return receitaCollection;
-    }
-
-    public void setReceitaCollection(Collection<Receita> receitaCollection) {
-        this.receitaCollection = receitaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Avaliacao> getAvaliacaoCollection() {
-        return avaliacaoCollection;
-    }
-
-    public void setAvaliacaoCollection(Collection<Avaliacao> avaliacaoCollection) {
-        this.avaliacaoCollection = avaliacaoCollection;
     }
 
     @Override

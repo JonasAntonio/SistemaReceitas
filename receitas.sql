@@ -4,7 +4,7 @@ CREATE TABLE `usuario` (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `senha` varchar(20) NOT NULL,
+  `senha` varchar(32) NOT NULL,
   `administrador` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -67,7 +67,7 @@
 
                                     <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
                                         <p:outputLabel value="Imagem"/>
-                                        <p:fileUpload id="imagem" value="#{receitaBean.receita.imagem}" mode="simple"/>
+                                        <p:fileUpload id="imagem" value="#{receitaBean.receita.imagem}" mode="simple" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                                     </h:panelGrid>
                                 </h:panelGrid>
                                 <p:commandButton ajax="false" value="Cadastrar" action="#{receitaBean.cadastrar(usuarioLogadoBean.usuario)}" id="commandButton-cadastrar" /><br/><br/>
