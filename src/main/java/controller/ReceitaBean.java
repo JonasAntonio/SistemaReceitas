@@ -8,6 +8,7 @@ package controller;
 import facade.ReceitaFacade;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,12 +34,15 @@ public class ReceitaBean {
 
     private Receita receita;
     
+    private List<Receita> receitas;
+  
     @Inject
     private ReceitaFacade receitaFacade;
     
     @PostConstruct
     public void Init() {
         receita = new Receita();
+        receitas = receitaFacade.findAll();
     }
 
     public Receita getReceita() {
@@ -47,6 +51,14 @@ public class ReceitaBean {
 
     public void setReceita(Receita receita) {
         this.receita = receita;
+    }
+
+    public List<Receita> getReceitas() {
+        return receitas;
+    }
+
+    public void setReceitas(List<Receita> receitas) {
+        this.receitas = receitas;
     }
 
     public ReceitaFacade getReceitaFacade() {
@@ -61,9 +73,6 @@ public class ReceitaBean {
     public String cadastrar(Usuario usuario) {
         //Pega o usuario da receita
         receita.setUsuario(usuario);
-        
-        
-        
         try {      
             receitaFacade.create(receita);
         } catch (Exception e) {
@@ -82,6 +91,12 @@ public class ReceitaBean {
             }
         }
         return "listaReceitas";
+    }
+    
+    public String excluir(Receita receita){
+       receitaFacade.remove(receita);
+       Init();
+       return "listaReceitas?faces-redirect=true"; 
     }
 }
     

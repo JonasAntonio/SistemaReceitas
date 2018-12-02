@@ -6,19 +6,17 @@
 package controller;
 
 import facade.UsuarioFacade;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import model.Usuario;
-import org.eclipse.persistence.jpa.jpql.Assert;
 import util.Hash;
 
 /**
@@ -31,16 +29,27 @@ public class UsuarioBean {
 
     private Usuario usuario;
     
+    private List<Usuario> usuarios;
+    
     @Inject
     private UsuarioFacade usuarioFacade;
     
     @PostConstruct
     public void init(){
         usuario  = new Usuario();
+        usuarios = usuarioFacade.findAll();
     }
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public void setUsuario(Usuario usuario) {

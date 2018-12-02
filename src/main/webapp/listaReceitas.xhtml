@@ -14,28 +14,31 @@
                     <h2 style="color:#E80C44">Nossas melhores receitas</h2>
                 </div>
             </ui:define>
-
-            <ui:define name="content">
-                <div style="margin: auto; width: 80%;">
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; font-family: arial, sans-serif; color: #7c7c7c;">
-                        
-                        <!--Laço para listar as receitas cadastradas no banco de dados-->
-                        <div style="width: 29%; min-width: 29%; border: 1px solid #dfdfdf; height: 450px; border-radius: 5px; margin-bottom: 20px;">
-                            <img src="./imagens/1.jpg" style="max-width: 100%; border-radius: 5px;"/>                        
-                            <div style="padding: 20px">
-                                <span style="font-size: 12px;">Autor: @VóMaria - Data Publicação: 20/11/2018</span>
-                                <h3>Macarrão ao Molho Branco</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-                                <button style="min-width: 100px; min-height: 40px; background-color: #007ad9; border-color: #007ad9; color: #fff;">
-                                    Leia mais...
-                                </button>
-                            </div>
-                        </div>                       
-                        
+            
+            <ui:define name="content">         
+                <h:form>
+                    <div style="margin: auto; width: 80%;">
+                        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; font-family: arial, sans-serif; color: #7c7c7c;">
+                                <!--Laço para listar as receitas cadastradas no banco de dados-->
+                            <ui:repeat value="#{receitaBean.receitas}" var="receita"> 
+                                <div style="width: 29%; min-width: 29%; border: 1px solid #dfdfdf; height: 450px; border-radius: 5px; margin-bottom: 20px;">
+                                    <img src="./imagens/1.jpg" style="max-width: 100%; border-radius: 5px;"/>                        
+                                    <div style="padding: 20px">
+                                        <span style="font-size: 12px;">#{receita.usuario.nome}</span>
+                                        <h3>#{receita.titulo}</h3>
+                                        <p>#{receita.ingredientes}</p>
+                                        <p>#{receita.preparo}</p>
+                                        <button style="min-width: 100px; min-height: 40px; background-color: #007ad9; border-color: #007ad9; color: #fff;">
+                                            Leia mais...
+                                        </button>
+                                    </div>
+                                </div>  
+                            </ui:repeat>
+                        </div>
                     </div>
-                </div>
+                </h:form>
             </ui:define>
+            
         </ui:composition>
     </body>
 </html>

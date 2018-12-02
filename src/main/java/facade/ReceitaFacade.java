@@ -28,5 +28,5 @@ public class ReceitaFacade extends AbstractFacade<Receita> {
     public ReceitaFacade() {
         super(Receita.class);
     }
-    
+
 }
