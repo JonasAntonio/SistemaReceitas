@@ -49,6 +49,7 @@ public class UsuarioLoginBean implements Serializable {
         this.senha = senha;
     }
   
+    //Método de acesso ao sistema
     public String efetuarLogin(){
         Optional<Usuario> usuario = facade.findByCredenciais(login, senha);
         if (usuario.isPresent()) {

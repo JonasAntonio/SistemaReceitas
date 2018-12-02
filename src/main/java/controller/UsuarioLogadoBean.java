@@ -35,6 +35,7 @@ public class UsuarioLogadoBean implements Serializable {
         return usuario != null;
     }
     
+    //Método que invalida a sessão
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/login.xhtml?faces-redirect=true";

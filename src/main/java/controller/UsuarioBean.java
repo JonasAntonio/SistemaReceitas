@@ -21,11 +21,16 @@ import util.Hash;
 @RequestScoped
 public class UsuarioBean {
 
-    private Usuario usuario = new Usuario();
+    private Usuario usuario;
     
     @Inject
     private UsuarioFacade usuarioFacade;
-   
+    
+    @PostConstruct
+    public void Init() {
+        usuario = new Usuario();
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -42,10 +47,11 @@ public class UsuarioBean {
         this.usuarioFacade = usuarioFacade;
     }
     
-    public String Cadastrar() {
-        String senha = usuario.getSenha();
-        usuario.setSenha(Hash.md5(senha));
+    //Metódo de cadastro de usuário
+    public String cadastrar() {
+        usuario.setSenha(Hash.md5(usuario.getSenha()));
         usuarioFacade.create(usuario);
+        // Retorna para a página de login após o cadastro
         return "login";
     }
 
