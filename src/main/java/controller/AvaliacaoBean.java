@@ -6,6 +6,7 @@
 package controller;
 
 import facade.AvaliacaoFacade;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -30,12 +31,16 @@ public class AvaliacaoBean {
 
     private Avaliacao avaliacao;
     
+    private List<Avaliacao> avaliacoes;
+    
     @Inject
     private AvaliacaoFacade avaliacaoFacade;
     
     @PostConstruct
     public void init() {
         avaliacao = new Avaliacao();
+        //Usado para listar todas as avaliacoes para o admin
+        avaliacoes = avaliacaoFacade.findAll();
     }
 
     public Avaliacao getAvaliacao() {
@@ -44,6 +49,14 @@ public class AvaliacaoBean {
 
     public void setAvaliacao(Avaliacao avaliacao) {
         this.avaliacao = avaliacao;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
     
     //Metódo de cadastro de usuário

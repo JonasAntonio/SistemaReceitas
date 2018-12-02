@@ -6,19 +6,24 @@
 package controller;
 
 import facade.ReceitaFacade;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import model.Avaliacao;
 import model.Receita;
 import model.Usuario;
 
@@ -35,7 +40,7 @@ public class ReceitaBean {
     private List<Receita> receitas;
     
     private String busca;
-  
+    
     @Inject
     private ReceitaFacade receitaFacade;
     
@@ -68,7 +73,7 @@ public class ReceitaBean {
     public void setBusca(String busca) {
         this.busca = busca;
     }
-    
+
     //Método de Cadastro da receita
     public String cadastrar(Usuario usuario) {
         //Pega o usuario da receita
@@ -119,6 +124,17 @@ public class ReceitaBean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         return null;
     }
+    
+    public void abrirReceita(Long receitaId) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+        try {
+            response.sendRedirect("verReceita?id=" + receitaId);
+        } catch (IOException e) {
+            Logger.getLogger(ReceitaBean.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
 }
     
 
