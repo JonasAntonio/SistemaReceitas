@@ -28,7 +28,8 @@ public class UsuarioLoginBean implements Serializable {
     @Inject
     private UsuarioLogadoBean usuarioLogadoBean;
 
-    @Inject UsuarioFacade facade;
+    @Inject 
+    private UsuarioFacade usuarioFacade;
 
     private String login;
     private String senha;
@@ -48,10 +49,10 @@ public class UsuarioLoginBean implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-  
+    
     //Método de acesso ao sistema
     public String efetuarLogin(){
-        Optional<Usuario> usuario = facade.findByCredenciais(login, senha);
+        Optional<Usuario> usuario = usuarioFacade.findByCredenciais(login, senha);
         if (usuario.isPresent()) {
             this.usuarioLogadoBean.setUsuario(usuario.get());
             return "adicionarReceita";

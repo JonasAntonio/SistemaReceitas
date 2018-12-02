@@ -6,17 +6,15 @@
 package controller;
 
 import facade.ReceitaFacade;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.sql.rowset.serial.SerialBlob;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -35,12 +33,14 @@ public class ReceitaBean {
     private Receita receita;
     
     private List<Receita> receitas;
+    
+    private String busca;
   
     @Inject
     private ReceitaFacade receitaFacade;
     
     @PostConstruct
-    public void Init() {
+    public void init() {
         receita = new Receita();
         receitas = receitaFacade.findAll();
     }
@@ -61,12 +61,12 @@ public class ReceitaBean {
         this.receitas = receitas;
     }
 
-    public ReceitaFacade getReceitaFacade() {
-        return receitaFacade;
+    public String getBusca() {
+        return busca;
     }
 
-    public void setReceitaFacade(ReceitaFacade receitaFacade) {
-        this.receitaFacade = receitaFacade;
+    public void setBusca(String busca) {
+        this.busca = busca;
     }
     
     //Método de Cadastro da receita
@@ -93,10 +93,31 @@ public class ReceitaBean {
         return "listaReceitas";
     }
     
+    //Para edição da receita
+    public String atualizar(Receita receita) {
+        receitaFacade.edit(receita);
+        init();
+        return "listaReceitas?faces-redirect=true"; 
+    }
+    
+    //Parte do admin remoção de receita
     public String excluir(Receita receita){
        receitaFacade.remove(receita);
-       Init();
+       init();
        return "listaReceitas?faces-redirect=true"; 
+    }
+    
+    //Método de busca da Receita pelo titulo
+    public String buscarTitulo(){
+        Optional<Receita> receitaOp = receitaFacade.findByTitulo(busca);
+        if (receitaOp.isPresent()) {
+            //vai para a pagina com os dados da receita
+            return "verReceita?id="+receitaOp.get().getId();
+        }
+
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Receita não Encontrada", "Título não Encontrado!");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        return null;
     }
 }
     

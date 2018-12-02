@@ -5,6 +5,7 @@
  */
 package facade;
 
+import java.util.Optional;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,10 @@ public class ReceitaFacade extends AbstractFacade<Receita> {
 
     public ReceitaFacade() {
         super(Receita.class);
+    }
+
+    public Optional<Receita> findByTitulo(String busca) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

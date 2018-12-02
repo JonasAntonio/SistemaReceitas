@@ -56,14 +56,6 @@ public class UsuarioBean {
         this.usuario = usuario;
     }
 
-    public UsuarioFacade getUsuarioFacade() {
-        return usuarioFacade;
-    }
-
-    public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
-        this.usuarioFacade = usuarioFacade;
-    }
-    
     //Metódo de cadastro de usuário
     public String cadastrar() {
         usuario.setSenha(Hash.md5(usuario.getSenha()));
@@ -86,6 +78,21 @@ public class UsuarioBean {
         }
         // Retorna para a página de login após o cadastro
         return "login";
+    }
+    
+    //Para mudança de senha
+    public String atualizar(Usuario usuario) {
+        usuarioFacade.edit(usuario);
+        init();
+        return "login";
+    }
+    
+    //pertence ao admin
+    public String excluir(Usuario usuario) {
+       usuarioFacade.remove(usuario);
+       init();
+       //Volta para a lista de usuarios
+       return "listaUsuarios"; 
     }
     
 }
