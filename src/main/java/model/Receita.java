@@ -14,7 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,10 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Receita.findByVideo", query = "SELECT r FROM Receita r WHERE r.video = :video")})
 public class Receita implements Serializable {
 
-    @Lob
-    @Column(name = "imagem")
-    private byte[] imagem;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +51,9 @@ public class Receita implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "titulo")
     private String titulo;
+    @Lob
+    @Column(name = "imagem")
+    private byte[] imagem;
     @Size(max = 255)
     @Column(name = "video")
     private String video;
@@ -60,8 +61,17 @@ public class Receita implements Serializable {
     @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
-    @Column(name = "texto")
-    private String texto;
+    @Column(name = "ingredientes")
+    private String ingredientes;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 2147483647)
+    @Column(name = "preparo")
+    private String preparo;
+    @JoinColumn(name = "usuario", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Usuario usuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receita")
     private Collection<Avaliacao> avaliacaoCollection;
 
@@ -72,10 +82,11 @@ public class Receita implements Serializable {
         this.id = id;
     }
 
-    public Receita(Long id, String titulo, String texto) {
+    public Receita(Long id, String titulo, String ingredientes, String preparo) {
         this.id = id;
         this.titulo = titulo;
-        this.texto = texto;
+        this.ingredientes = ingredientes;
+        this.preparo = preparo;
     }
 
     public Long getId() {
@@ -94,6 +105,13 @@ public class Receita implements Serializable {
         this.titulo = titulo;
     }
 
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
 
     public String getVideo() {
         return video;
@@ -103,12 +121,28 @@ public class Receita implements Serializable {
         this.video = video;
     }
 
-    public String getTexto() {
-        return texto;
+    public String getIngredientes() {
+        return ingredientes;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public String getPreparo() {
+        return preparo;
+    }
+
+    public void setPreparo(String preparo) {
+        this.preparo = preparo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @XmlTransient
@@ -143,14 +177,6 @@ public class Receita implements Serializable {
     @Override
     public String toString() {
         return "model.Receita[ id=" + id + " ]";
-    }
-
-    public byte[] getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
     }
     
 }

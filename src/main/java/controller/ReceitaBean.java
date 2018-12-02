@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import model.Receita;
+import model.Usuario;
 
 /**
  *
@@ -44,6 +45,13 @@ public class ReceitaBean {
 
     public void setReceitaFacade(ReceitaFacade receitaFacade) {
         this.receitaFacade = receitaFacade;
+    }
+    
+    //Método de Cadastro da receita
+    public String cadastrar(Usuario usuario) {
+        receita.setUsuario(usuario);
+        receitaFacade.create(receita);
+        return "listaReceitas";
     }
     
 }

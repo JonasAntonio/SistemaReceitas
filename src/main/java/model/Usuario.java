@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
     , @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")
     , @NamedQuery(name = "Usuario.findByAdministrador", query = "SELECT u FROM Usuario u WHERE u.administrador = :administrador")
-    , @NamedQuery(name = "Usuario.findByCredenciais", query = "SELECT u FROM Usuario u WHERE u.nome = :login AND u.senha = :senha")})
+    , @NamedQuery(name = "Usuario.findByCredenciais", query= "SELECT u FROM Usuario u WHERE u.nome = :login AND u.senha = :senha")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,13 +59,15 @@ public class Usuario implements Serializable {
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 32)
+    @Size(min = 1, max = 20)
     @Column(name = "senha")
     private String senha;
     @Basic(optional = false)
     @NotNull
     @Column(name = "administrador")
     private boolean administrador;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private Collection<Receita> receitaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<Avaliacao> avaliacaoCollection;
 
@@ -122,6 +124,15 @@ public class Usuario implements Serializable {
 
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
+    }
+
+    @XmlTransient
+    public Collection<Receita> getReceitaCollection() {
+        return receitaCollection;
+    }
+
+    public void setReceitaCollection(Collection<Receita> receitaCollection) {
+        this.receitaCollection = receitaCollection;
     }
 
     @XmlTransient

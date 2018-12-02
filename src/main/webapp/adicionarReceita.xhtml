@@ -34,7 +34,7 @@
                                 <p:messages autoUpdate="true" closable="true"/>
                                 <h:panelGrid columns="2" cellpadding="10">
                                     <p:outputLabel value="Título"/>
-                                    <p:inputText id="titulo" value="" size="100" required="true" 
+                                    <p:inputText id="titulo" value="#{receitaBean.receita.titulo}" size="100" required="true" 
                                                  requiredMessage="Preencha o campo de Título!"
                                                  validatorMessage="Insira um Título válido!">
                                         <f:validateLength minimum="5" maximum="20"/>
@@ -45,13 +45,13 @@
                                 <h:panelGrid columns="2"  cellpadding="5">
                                     <p:outputLabel value="Ingredientes"/>
                                     <p:outputLabel value="Modo de Preparo"/>
-                                    <p:inputTextarea id="ingredientes" value="" cols="52" rows="10" 
+                                    <p:inputTextarea id="ingredientes" value="#{receitaBean.receita.ingredientes}" cols="52" rows="10" 
                                                      required="true" requiredMessage="Preencha o campo de Ingredientes!"
                                                      validatorMessage="Preencha corretamente o campo de Ingredientes!">
                                         <f:validateLength minimum="20" maximum="255"/>
                                         <p:tooltip for="ingredientes" value="min. 20, max. 255" trackMouse="true"/>
                                     </p:inputTextarea>
-                                    <p:inputTextarea id="preparo" value="" cols="52" rows="10" 
+                                    <p:inputTextarea id="preparo" value="#{receitaBean.receita.preparo}" cols="52" rows="10" 
                                                      required="true" requiredMessage="Preencha o campo de Modo de Preparo!"
                                                      validatorMessage="Preencha corretamente o campo de Modo de Preparo!">
                                         <f:validateLength minimum="20" maximum="255"/>
@@ -60,17 +60,17 @@
 
                                     <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
                                         <p:outputLabel value="Link para Vídeo"/>
-                                        <p:inputText id="video" size="30" value="">
+                                        <p:inputText id="video" size="30" value="#{receitaBean.receita.video}">
                                             <p:tooltip for="video" value="Link de um vídeo da sua receita" trackMouse="true"/>
                                         </p:inputText>
                                     </h:panelGrid>
 
                                     <h:panelGrid columns="2" cellpadding="10" cellspacing="10">
                                         <p:outputLabel value="Imagem"/>
-                                        <p:fileUpload id="imagem" value="" mode="simple"/>
+                                        <p:fileUpload id="imagem" value="#{receitaBean.receita.imagem}" mode="simple"/>
                                     </h:panelGrid>
                                 </h:panelGrid>
-                                <p:commandButton value="Cadastrar" id="commandButton-acessar" /><br/><br/>
+                                <p:commandButton ajax="false" value="Cadastrar" action="#{receitaBean.cadastrar(usuarioLogadoBean.usuario)}" id="commandButton-cadastrar" /><br/><br/>
                             </p:panel>
                         </h:form>
                     </div>
