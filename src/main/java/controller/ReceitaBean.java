@@ -7,6 +7,7 @@ package controller;
 
 import facade.ReceitaFacade;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -48,6 +49,15 @@ public class ReceitaBean {
     public void init() {
         receita = new Receita();
         receitas = receitaFacade.findAll();
+        if(receitas == null){
+            receitas = new ArrayList<Receita>();
+        }else{
+            for(Receita r : receitas){
+                if(r.getPreparo().length() >= 80){
+                    r.setPreparo(r.getPreparo().substring(0, 80) + "...");
+                }                
+            }
+        }
     }
 
     public Receita getReceita() {
