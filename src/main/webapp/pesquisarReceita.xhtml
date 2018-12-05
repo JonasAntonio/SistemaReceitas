@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./WEB-INF/templateAcessoBasico.xhtml">
+
+            <ui:define name="top">
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem value="Receitas" url="listaReceitas.xhtml"/>
+                        <p:menuitem value="Pesquisar Receita" url="pesquisarReceita.xhtml"/>
+                        <p:menuitem value="Adicionar Receita" url="adicionarReceita.xhtml"/>
+                        <f:facet name="options">
+                            <p:outputLabel style="margin:1px 10px 1px 1px;" value="#{usuarioLogadoBean.usuario.nome}"/>
+                            <p:commandButton value="Sair" action="#{usuarioLogadoBean.logout()}"/>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <div style="display: flex">
+                    <div style="margin: auto; text-align: center">
+                        <br/><br/>
+                        <p:panelGrid>
+                            <p:outputLabel value="Pesquisar Receita"/><br/><br/>
+                            <p:inputText value=""/>
+                            &nbsp;
+                            <p:commandButton value="Pesquisar"/>
+                            <br/><br/>
+                            <div class="p-grid p-dir-col">
+                                <div class="p-col">
+                                    <ui:repeat value="1" var="receita">
+                                        <div class="box">
+                                            <p:panel closable="true" id="receitaPanel" header="Titulo da receita">
+                                                <p:outputLabel value="ingredientes"/><br/>
+                                                <p:outputLabel value="modo de preparo"/>
+                                                <f:facet name="footer" parent="receitaPanel">
+                                                    <p:outputLabel value="Autor: autor"/>
+                                                    <div align="right" style="margin-top: -7%">
+                                                        <p:commandButton value="Leia mais..."/>
+                                                    </div>
+                                                </f:facet>
+                                            </p:panel>
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                        </p:panelGrid>
+                    </div>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
