@@ -37,7 +37,7 @@ public class UsuarioBean {
     @PostConstruct
     public void init(){
         usuario  = new Usuario();
-        usuarios = usuarioFacade.findAll();
+        this.usuarios = usuarioFacade.findAll();
     }
 
     public Usuario getUsuario() {
