@@ -24,20 +24,24 @@
                             <tr>
                                 <th>#</th>
                                 <th>Usuário</th>
-                                <th>Data Cadastro</th>
+                                <th>E-mail</th>
+                                <th>Admin</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody>                           
+                        <tbody> 
+                            <ui:repeat value="#{usuarioListaBean.usuarios}" var="usuario"> 
                             <tr style="border: 1px solid #ccc;">
-                                <td style="width: 2%;">1</td>
-                                <td style="width: 50%; text-align: center;">lucas</td>
-                                <td style="width: 20%; text-align: center;">20/12/2018</td>
-                                <td style="width: 28%; text-align: center;">
+                                <td style="width: 2%;">#{usuario.id}</td>
+                                <td style="width: 50%; text-align: center;">#{usuario.nome}</td>
+                                <td style="width: 20%; text-align: center;">#{usuario.email}</td>
+                                <td style="width: 2%; text-align: center;">#{usuario.administrador}</td>
+                                <td style="width: 26%; text-align: center;">
                                     <button>Editar</button>
                                     <button>Excluir</button>
                                 </td>
                             </tr>
+                            </ui:repeat>
                         </tbody>
                     </table>
                 </div>

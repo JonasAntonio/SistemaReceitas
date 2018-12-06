@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.receita;
 
 import facade.ReceitaFacade;
 import java.io.IOException;
@@ -24,7 +24,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import model.Avaliacao;
 import model.Receita;
 import model.Usuario;
 
@@ -37,27 +36,13 @@ import model.Usuario;
 public class ReceitaBean {
 
     private Receita receita;
-    
-    private List<Receita> receitas;
-    
-    private String busca;
-    
+ 
     @Inject
     private ReceitaFacade receitaFacade;
     
     @PostConstruct
     public void init() {
-        receita = new Receita();
-        receitas = receitaFacade.findAll();
-        if(receitas == null){
-            receitas = new ArrayList<Receita>();
-        }else{
-            for(Receita r : receitas){
-                if(r.getPreparo().length() >= 80){
-                    r.setPreparo(r.getPreparo().substring(0, 80) + "...");
-                }                
-            }
-        }
+        receita = new Receita(); 
     }
 
     public Receita getReceita() {
@@ -67,23 +52,7 @@ public class ReceitaBean {
     public void setReceita(Receita receita) {
         this.receita = receita;
     }
-
-    public List<Receita> getReceitas() {
-        return receitas;
-    }
-
-    public void setReceitas(List<Receita> receitas) {
-        this.receitas = receitas;
-    }
-
-    public String getBusca() {
-        return busca;
-    }
-
-    public void setBusca(String busca) {
-        this.busca = busca;
-    }
-
+    
     //Método de Cadastro da receita
     public String cadastrar(Usuario usuario) {
         //Pega o usuario da receita
@@ -124,7 +93,7 @@ public class ReceitaBean {
     
     //Método de busca da Receita pelo titulo
     public String buscarTitulo(){
-        Optional<Receita> receitaOp = receitaFacade.findByTitulo(busca);
+        Optional<Receita> receitaOp = receitaFacade.findByTitulo("");
         if (receitaOp.isPresent()) {
             //vai para a pagina com os dados da receita
             return "verReceita?id="+receitaOp.get().getId();

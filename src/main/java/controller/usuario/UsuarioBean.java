@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.usuario;
 
 import facade.UsuarioFacade;
 import java.util.List;
@@ -29,27 +29,16 @@ public class UsuarioBean {
 
     private Usuario usuario;
     
-    private List<Usuario> usuarios;
-    
     @Inject
     private UsuarioFacade usuarioFacade;
     
     @PostConstruct
     public void init(){
         usuario  = new Usuario();
-        this.usuarios = usuarioFacade.findAll();
     }
 
     public Usuario getUsuario() {
         return usuario;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
     }
 
     public void setUsuario(Usuario usuario) {
